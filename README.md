@@ -6,7 +6,7 @@ Créer le projet.
 Initialiser GIT
 Importer le fichier html (fait parti de l'ennoncer) 
 Création d'un fichier dédier au JS.
-Appeler le fichier .js dans le code html.
+Appeler le fichier .js dans le code html. (faire un test)
 Vérifier que les champs du formulaire ne sont pas vide
     Si vide afficher le message d'erreur présent dans le code html
 Ajouter le contenu du formulaire dans un commentaire (se servir des balises html déjà présente)
