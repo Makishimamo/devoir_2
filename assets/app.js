@@ -19,3 +19,12 @@ if (prenom.value === '') {
 }   else if (message.value === '') {
     showErrorMessage();
 }
+
+// Céation d'un fonction qui va ajouter le commentaire dans la div id="comment-list"
+function commenter() {
+    alert ("Bouton cliquer") ;
+}
+
+// Lier la fonction au bouton "Envoyer"
+const myButton = document.querySelector('button');
+myButton.addEventListener('click', commenter());
