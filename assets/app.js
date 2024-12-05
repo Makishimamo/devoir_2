@@ -15,14 +15,15 @@ function showErrorMessage() {
 let prenom = document.getElementById('first-name');
 let nom = document.getElementById('last-name');
 let message = document.getElementById('message');
+let champs = [prenom, nom, message];
 
 // Vérifier chaque champs, si vide lancer la fonction showErrorMessage()
-if (prenom.value === '') {
-    showErrorMessage();
-}   else if (nom.value === '') {
-    showErrorMessage();
-}   else if (message.value === '') {
-    showErrorMessage();
+function champVide() {
+    champs.forEach(function(champs) {
+        if (champs.value.trim() === '') {
+            showErrorMessage();
+        }
+    });
 }
 
 // Céation d'un fonction qui va ajouter le commentaire dans la div id="comment-list"
@@ -32,4 +33,5 @@ function commenter() {
 
 // Lier la fonction au bouton "Envoyer"
 const myButton = document.querySelector('button');
-myButton.addEventListener('click', commenter());
+myButton.addEventListener('click', champVide);
+myButton.addEventListener('click', commenter);
