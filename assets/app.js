@@ -1,6 +1,12 @@
 // Test : appel du fichier
 //alert("Hello World");
 
+// Empêcher l'envoi du formulaire par défaut
+document.getElementById('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+});
+
+
 // Création de la fonction pour faire apparaitre le message d'erreur
 function showErrorMessage() {
     document.getElementById('error-message').style.display = 'block';
