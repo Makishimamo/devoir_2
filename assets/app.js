@@ -6,7 +6,6 @@ document.getElementById('form').addEventListener('submit', function(event) {
     event.preventDefault();
 });
 
-
 // Création de la fonction pour faire apparaitre le message d'erreur
 function showErrorMessage() {
     document.getElementById('error-message').style.display = 'block';
