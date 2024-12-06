@@ -1,9 +1,17 @@
 // Test : appel du fichier
 //alert("Hello World");
 
-// Empêcher l'envoi du formulaire par défaut
+// Empêcher l'envoi du formulaire par défaut et gérer l'événement de soumission
 document.getElementById('form').addEventListener('submit', function(event) {
     event.preventDefault();
+
+    // Vérifier les champs et ajouter un commentaire si tous les champs sont remplis
+    if (champVide()) {
+        const nomV = document.getElementById('last-name').value;
+        const prenomV = document.getElementById('first-name').value;
+        const messageV = document.getElementById('message').value;
+        addCom(nomV, prenomV, messageV);
+    }
 });
 
 // Création de la fonction pour faire apparaitre le message d'erreur
@@ -11,26 +19,28 @@ function showErrorMessage() {
     document.getElementById('error-message').style.display = 'block';
 }
 
-// Selectionner les champs du formulaire
+// Sélectionner les champs du formulaire
 let prenom = document.getElementById('first-name');
 let nom = document.getElementById('last-name');
 let message = document.getElementById('message');
 let champs = [prenom, nom, message];
 
-// Vérifier chaque champs, si vide lancer la fonction showErrorMessage()
+// Vérifier chaque champ, si vide, lancer la fonction showErrorMessage()
 function champVide() {
-    champs.forEach(function(champs) {
-        if (champs.value.trim() === '') {
+    let allFieldsFilled = true;
+
+    champs.forEach(function(champ) {
+        if (champ.value.trim() === '') {
             showErrorMessage();
+            allFieldsFilled = false;
         }
     });
+
+    return allFieldsFilled; // Retourne true si tous les champs sont remplis, sinon false
 }
 
-// Création d'une fonction pour créer le nouveau commentaire
-const commentList =  document.getElementById('comment-list');
-const nomV = document.getElementById('last-name').value;
-const prenomV = document.getElementById('first-name').value;
-const messageV = document.getElementById('message').value;
+// Création d'une fonction pour créer le nouveau commentaire dans le DOM
+const commentList = document.getElementById('comment-list');
 const myForm = document.getElementById('form');
 
 function addCom(nomV, prenomV, messageV) {
@@ -44,7 +54,7 @@ function addCom(nomV, prenomV, messageV) {
     // J'insère le code suivant dans ma <div>
     newCom.innerHTML = ` 
         <div class="flex-1 py-10 border-t border-gray-200"> 
-            <h3 class="font-medium text-gray-900">${nomV} ${prenomV}</h3> 
+            <h3 class="font-medium text-gray-900">${prenomV} ${nomV}</h3> 
             <div class="prose prose-sm mt-4 max-w-none text-gray-500"> 
                 <p>${messageV}</p> 
             </div> 
@@ -54,11 +64,20 @@ function addCom(nomV, prenomV, messageV) {
     // Ajoute le commentaire à la suite des autres
     commentList.appendChild(newCom);
 
-    // Efface les valeurs contenue dans le formulaire
+    // Efface les valeurs contenues dans le formulaire
     myForm.reset(); 
 }
 
 // Lier la fonction au bouton "Envoyer"
 const myButton = document.querySelector('button');
-myButton.addEventListener('click', champVide);
-myButton.addEventListener('click', addCom);
+myButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+
+    // Vérifier les champs et ajouter un commentaire si tous les champs sont remplis
+    if (champVide()) {
+        const nomV = document.getElementById('last-name').value;
+        const prenomV = document.getElementById('first-name').value;
+        const messageV = document.getElementById('message').value;
+        addCom(nomV, prenomV, messageV);
+    }
+});
