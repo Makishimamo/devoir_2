@@ -1,6 +1,3 @@
-// Test : appel du fichier
-//alert("Hello World");
-
 // Empêcher l'envoi du formulaire par défaut et gérer l'événement de soumission
 document.getElementById('form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -11,12 +8,20 @@ document.getElementById('form').addEventListener('submit', function(event) {
         const prenomV = document.getElementById('first-name').value;
         const messageV = document.getElementById('message').value;
         addCom(nomV, prenomV, messageV);
+        hideErrorMessage(); // Masquer le message d'erreur si tous les champs sont remplis
+    } else {
+        showErrorMessage(); // Afficher le message d'erreur si un champ est vide
     }
 });
 
-// Création de la fonction pour faire apparaitre le message d'erreur
+// Création de la fonction pour faire apparaître le message d'erreur
 function showErrorMessage() {
     document.getElementById('error-message').style.display = 'block';
+}
+
+// Création de la fonction pour masquer le message d'erreur
+function hideErrorMessage() {
+    document.getElementById('error-message').style.display = 'none';
 }
 
 // Sélectionner les champs du formulaire
@@ -31,7 +36,6 @@ function champVide() {
 
     champs.forEach(function(champ) {
         if (champ.value.trim() === '') {
-            showErrorMessage();
             allFieldsFilled = false;
         }
     });
@@ -48,7 +52,7 @@ function addCom(nomV, prenomV, messageV) {
     // Crée une <div>
     const newCom = document.createElement('div');
     
-    // Ajoute la class à la <div> créer
+    // Ajoute la class à la <div> créée
     newCom.classList.add('flex', 'space-x-4', 'text-sm', 'text-gray-500'); 
     
     // J'insère le code suivant dans ma <div>
@@ -79,5 +83,8 @@ myButton.addEventListener('click', function(event) {
         const prenomV = document.getElementById('first-name').value;
         const messageV = document.getElementById('message').value;
         addCom(nomV, prenomV, messageV);
+        hideErrorMessage(); // Masquer le message d'erreur si tous les champs sont remplis
+    } else {
+        showErrorMessage(); // Afficher le message d'erreur si un champ est vide
     }
 });
